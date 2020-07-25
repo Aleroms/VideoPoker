@@ -15,7 +15,7 @@ public class Deck : MonoBehaviour
 	private List<GameObject> _deck2;
 	private Cards _card;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 		//_deck = new List<Cards>();
 		_deck2 = new List<GameObject>();
@@ -77,6 +77,13 @@ public class Deck : MonoBehaviour
 			_deck2[randIndex] = temp;
 
 		}
+	}
+	public GameObject GetSelection()
+	{
+		//print("capacity: " + _deck2.Count);
+		GameObject t = _deck2[0];
+		_deck2.RemoveAt(0);
+		return t;
 	}
 }
 
