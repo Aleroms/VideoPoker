@@ -5,13 +5,15 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
 	private int _credits;
+	private int _maxWager;
 	private int _wager;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
 		_credits = 100;
 		_wager = 0;
+		_maxWager = 5;
     }
 
 
@@ -27,12 +29,15 @@ public class Player : MonoBehaviour
 	{
 		return _credits;
 	}
+	public int GetMaxWager()
+	{
+		return _maxWager;
+	}
 	public void SetWager()
 	{
 		if (_wager != 5)
 			_wager++;
 
-		print("wager" + _wager);
 	}
 	public void ResetWager()
 	{

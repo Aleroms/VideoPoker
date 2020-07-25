@@ -31,7 +31,6 @@ public class Table : MonoBehaviour
 			print(_displayedCards[i].name);
 		}
 
-
 	}
 
 	// Update is called once per frame
@@ -44,6 +43,7 @@ public class Table : MonoBehaviour
 		switch (n)
 		{
 			case 0:
+
 				break;
 			case 1:
 				break;
