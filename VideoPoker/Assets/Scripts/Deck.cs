@@ -8,29 +8,35 @@ public class Deck : MonoBehaviour
 	private GameObject _cardPrefab;
 	[SerializeField]
 	private GameObject _deckContainer;
-	private List<Cards> _deck;
+	[SerializeField]
+	private Sprite[] _cardFaces;
+	//private List<Cards> _deck;
+	[SerializeField]
+	private List<GameObject> _deck2;
 	private Cards _card;
     // Start is called before the first frame update
     void Start()
     {
-		_deck = new List<Cards>();
+		//_deck = new List<Cards>();
+		_deck2 = new List<GameObject>();
 		GenerateDeck();
+		Shuffle();
 
-		for(int i = 0; i < _deck.Count; i++)
+		/*for(int i = 0; i < _deck2.Count; i++)
 		{
 			print(_deck[i].GetSuit() + ":" + _deck[i].GetRank());
-		}
+		}*/
 		
     }
 	void GenerateDeck()
 	{
-		
+		int spriteIndex = 0;
 
 		for (int i = 0; i < 4; i++)
 		{
 			
 
-			for (int j = 0; j < 13; j++)
+			for (int j = 1; j < 14; j++)
 			{
 				GameObject tempCard = Instantiate(_cardPrefab, transform.position, Quaternion.identity);
 				Cards temp = tempCard.GetComponent<Cards>();
@@ -38,9 +44,15 @@ public class Deck : MonoBehaviour
 				
 				temp.setSuit(i);
 				temp.setRank(j);
-				_deck.Add(temp);
-
+				tempCard.GetComponent<SpriteRenderer>().sprite = _cardFaces[spriteIndex];
+				
 				tempCard.transform.parent = _deckContainer.transform;
+				tempCard.name = temp.GetSuit().ToString() + temp.GetRank().ToString();
+
+				//_deck.Add(temp);
+				_deck2.Add(tempCard);
+				spriteIndex++;
+
 			}
 
 		}
@@ -50,26 +62,21 @@ public class Deck : MonoBehaviour
     {
         
     }
-	void shuffle()
+	void Shuffle()
 	{
-		//TODO shuffles the list
+		int randIndex;
+
+		for(int i=0; i < _deck2.Count; i++)
+		{
+			GameObject temp = _deck2[i];
+
+			randIndex = Random.Range(i, _deck2.Count);
+
+			_deck2[i] = _deck2[randIndex];
+
+			_deck2[randIndex] = temp;
+
+		}
 	}
 }
-/*
- if (i == 0)
-				{
-					_deck[i].setSuit(Cards.Suit.CLUB);
-				}
-				else if(i == 1)
-				{
-					_deck[i].setSuit(Cards.Suit.DIAMOND);
-				}
-				else if(i == 2)
-				{
-					_deck[i].setSuit(Cards.Suit.HEART);
-				}
-				else if(i == 3)
 
-	 
-	 
-	 */

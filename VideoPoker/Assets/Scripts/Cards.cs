@@ -5,10 +5,12 @@ using UnityEngine;
 public class Cards : MonoBehaviour
 {
 	public enum Suit { CLUB, DIAMOND, HEART, SPADE};
+	[SerializeField]
 	private Suit _suit;
+	[SerializeField]
 	private int _rank;
 
-	
+	//remove serializeField when submitting
 
     public Suit GetSuit()
 	{
