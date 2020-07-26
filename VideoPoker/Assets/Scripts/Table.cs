@@ -77,6 +77,10 @@ public class Table : MonoBehaviour
 			}
 		}
 	}
+	public List<GameObject> GetSelectedCards()
+	{
+		return _selectedCards;
+	}
 	
 
 

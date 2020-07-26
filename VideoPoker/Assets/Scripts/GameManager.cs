@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 	private int _playerWager;
 	private Player _player;
 	private Table _table;
+	private CombinationsPayOut _cpo;
 	public GameManager instance;
 	
 	
@@ -20,9 +21,11 @@ public class GameManager : MonoBehaviour
 
 		_player = GameObject.Find("Player").GetComponent<Player>();
 		_table = GameObject.Find("Canvas").GetComponent<Table>();
+		_cpo = GameObject.Find("GameManager").GetComponent<CombinationsPayOut>();
 
 		if (_table == null) print("table is null");
 		if (_player == null) print("player is null");
+		if (_cpo == null) print("combination is null");
 	}
 	void Start()
 	{
@@ -43,9 +46,24 @@ public class GameManager : MonoBehaviour
 		{
 			_playerWager = _player.GetWager();
 			_table.Play();
+
+			if (_cpo.CheckCards(_table.GetSelectedCards()))
+			{
+				print("you won");
+			}
+			else
+				LoseCondition();
 		}
 		else
-			print("Game Over");
+			GameOver();
 
+	}
+	void LoseCondition()
+	{
+
+	}
+	void GameOver()
+	{
+		print("Game Over");
 	}
 }
