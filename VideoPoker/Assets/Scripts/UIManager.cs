@@ -38,7 +38,7 @@ public class UIManager : MonoBehaviour
 		_win.gameObject.SetActive(false);
 		OnDisableText();
     }
-	void OnDisableText()
+	public void OnDisableText()
 	{
 		for(int i=0; i < _heldText.Length; i++)
 		{
@@ -65,9 +65,6 @@ public class UIManager : MonoBehaviour
 	}
 	public void AddWager()
 	{
-		//print("isbeingcalled");
-		print("max"+_maxWager);
-		print("wager" + _wagerInt);
 
 		if(_wagerInt < _maxWager)
 			_wagerInt++;
