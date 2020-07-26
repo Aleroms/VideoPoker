@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
 
 			if (_cpo.CheckCards(_table.GetSelectedCards()))
 			{
-				print("you won");
+				print("you won: "+_cpo.GetWinningHand());
 			}
 			else
 				LoseCondition();
@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 	}
 	void LoseCondition()
 	{
-
+		print("you lost");
 	}
 	void GameOver()
 	{

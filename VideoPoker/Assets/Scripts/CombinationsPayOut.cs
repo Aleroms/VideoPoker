@@ -4,31 +4,109 @@ using UnityEngine;
 
 public class CombinationsPayOut : MonoBehaviour
 {
-	private string _suitChecker;
-	private int _rankChecker;
 
 	private List<GameObject> _selectedCards;
 	private List<int> _pairChecker;
 	private string _highestPair;
-	private bool _playerWon;
 	private Cards _card;
-	
 
+	void Start()
+	{
+		_selectedCards = new List<GameObject>();
+		_pairChecker = new List<int>();
+		//_playerWon = false;
+		_highestPair = "default";
+	}
+	public string GetWinningHand()
+	{
+		return _highestPair;
+	}
 	public bool CheckCards(List<GameObject> selected)
 	{
 		_selectedCards = selected;
 	    _pairChecker = GetSortedRankList();
 
-		//you were stuck on an issue where _paircheker was mispelled
+		if(CheckForRoyalFlush())
+		{
+			_highestPair = "RoyalFlush";
+			return true;
+		}
+		else if(CheckForStraightFlush())
+		{
+			_highestPair = "StraightFlush";
+			return true;
+		}
+		else if(CheckForQuad())
+		{
+			_highestPair = "FourOfAKind";
+			return true;
+		}
+		else if (CheckForFlush())
+		{
+			_highestPair = "Flush";
+			return true;
+		}
+		else if (CheckForStraight())
+		{
+			_highestPair = "Straight";
+			return true;
+		}
+		else if (CheckForThreeK())
+		{
+			_highestPair = "ThreeOfAKind";
+			return true;
+		}
+		else if (CheckForPair())
+		{
+			_highestPair = "TwoPairs";
+			return true;
+		}
+		else if (CheckForJacksOrBetter())
+		{
+			_highestPair = "JacksOrBetter";
+			return true;
+		}
 
-		_playerWon = CheckForPair();//works
-		//_playerWon = CheckForThreeK();//works
-		//_playerWon = CheckForQuad();//works
-		//_playerWon = CheckForStraight();
-		//_playerWon = CheckForRoyalFlush();//works
-		
+		//player lost
+		return false;
+	}
+	List<int> GetSortedRankList()
+	{
+		List<int> pc = new List<int>();
 
-		return _playerWon;
+		for (int i = 0; i < _selectedCards.Count; i++)
+		{
+			_card = _selectedCards[i].GetComponent<Cards>();
+			pc.Add(_card.GetRank());
+		}
+		pc.Sort();
+
+		return pc;
+	}
+	bool CheckForFullHouse()
+	{
+		bool p34,p01;
+
+		p34 = _pairChecker[3] == _pairChecker[4];
+		p01 = _pairChecker[0] == _pairChecker[1];
+
+		return CheckForThreeK() && p34 || CheckForThreeK() && p01;
+	}
+	bool CheckForJacksOrBetter()
+	{
+		int highCard = 0;
+
+		for(int i = 0; i < _pairChecker.Count; i++)
+		{
+			if (_pairChecker[i] == 1 || _pairChecker[i] > 10)
+				highCard++;
+		}
+
+		return highCard > 1;
+	}
+	bool CheckForStraightFlush()
+	{
+		return CheckForFlush() && CheckForStraight();
 	}
 	bool StraightHelper(int r)
 	{
@@ -63,7 +141,7 @@ public class CombinationsPayOut : MonoBehaviour
 	}
 	bool CheckForQuad()
 	{
-		ResetCheckers();
+		//ResetCheckers();
 
 		bool p0123, p1234;
 
@@ -77,29 +155,18 @@ public class CombinationsPayOut : MonoBehaviour
 	}
 	bool CheckForThreeK()
 	{
-		ResetCheckers();
-		
+		//ResetCheckers();
 
-		bool p012, p123;
+
+		bool p012, p123, p234;
 
 		p012 = _pairChecker[0] == _pairChecker[1] && _pairChecker[1] == _pairChecker[2];
 		p123 = _pairChecker[1] == _pairChecker[2] && _pairChecker[2] == _pairChecker[3];
+		p234 = _pairChecker[2] == _pairChecker[3] && _pairChecker[3] == _pairChecker[4];
 
-		return p012 || p123;
+		return p012 || p123 || p234;
 	}
-	List<int> GetSortedRankList()
-	{
-		List<int> pc = new List<int>();
-
-		for (int i = 0; i < _selectedCards.Count; i++)
-		{
-			_card = _selectedCards[i].GetComponent<Cards>();
-			pc.Add(_card.GetRank());
-		}
-		pc.Sort();
-
-		return pc;
-	}
+	
 	bool CheckForPair()
 	{
 		//ResetCheckers();
@@ -118,8 +185,8 @@ public class CombinationsPayOut : MonoBehaviour
 	
 	bool CheckForFlush()
 	{
-		ResetCheckers();
-		
+		//ResetCheckers();
+		string _suitChecker;
 
 		_card = _selectedCards[0].GetComponent<Cards>();
 		_suitChecker = _card.GetSuit().ToString();
@@ -138,28 +205,6 @@ public class CombinationsPayOut : MonoBehaviour
 		return true;
 	}
     // Start is called before the first frame update
-    void Start()
-    {
-		_selectedCards = new List<GameObject>();
-		_pairChecker = new List<int>();
-		_playerWon = false;
-		_highestPair = "default";
-    }
+    
 
-
-	void Debug()
-	{
-		//print(_card.GetSuit().ToString() + _card.GetRank().ToString());//print(_card.GetSuit().ToString() + _card.GetRank().ToString());
-		print("selected.size:" + _selectedCards.Count);
-		for(int i = 0; i < _selectedCards.Count; i++)
-		{
-			print(_selectedCards[i].name);
-		}
-	}
-	void ResetCheckers()
-	{
-		_card = null;
-		_rankChecker = -1;
-		_suitChecker = "default";
-	}
 }
