@@ -13,7 +13,7 @@ public class Player : MonoBehaviour
     {
 		_credits = 100;
 		_wager = 0;
-		_maxWager = 5;
+		
     }
 
 
@@ -33,9 +33,17 @@ public class Player : MonoBehaviour
 	{
 		return _maxWager;
 	}
-	public void SetWager()
+	public void SetMaxWager(int n)
 	{
-		if (_wager != 5)
+		_maxWager = n;
+	}
+	public int GetWager()
+	{
+		return _wager;
+	}
+	public void AddWager()
+	{
+		if (_wager != _maxWager)
 			_wager++;
 
 	}

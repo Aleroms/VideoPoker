@@ -11,7 +11,6 @@ public class Cards : MonoBehaviour
 	private int _rank;
 
 	//remove serializeField when submitting
-
     public Suit GetSuit()
 	{
 		return _suit;

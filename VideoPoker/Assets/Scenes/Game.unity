@@ -1212,11 +1212,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 608683692}
+  - component: {fileID: 608683693}
+  - component: {fileID: 608683694}
   - component: {fileID: 608683691}
   - component: {fileID: 608683690}
   - component: {fileID: 608683689}
-  - component: {fileID: 608683693}
-  - component: {fileID: 608683694}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1317,13 +1317,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72939671f448f0849b284759e6ce0393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedCards: []
+  _selectedCards: []
   slot:
   - {fileID: 1868178555}
   - {fileID: 693298512}
   - {fileID: 698283586}
   - {fileID: 525457946}
   - {fileID: 12840687}
+  isSelected: 0000000000
 --- !u!114 &608683694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1345,6 +1346,50 @@ MonoBehaviour:
   _wager: {fileID: 310644546}
   _win: {fileID: 1569910149}
   _credits: {fileID: 1447077426}
+--- !u!1 &670931750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 670931752}
+  - component: {fileID: 670931751}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &670931751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670931750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4142adbf29c644246bbd3130df6170fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instance: {fileID: 0}
+--- !u!4 &670931752
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 670931750}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 390.80667, y: 117.31938, z: 8.008337}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &693298511
 GameObject:
   m_ObjectHideFlags: 0
@@ -1828,7 +1873,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1154343593}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 670931751}
+        m_MethodName: Deal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1154343593
 MonoBehaviour:
   m_ObjectHideFlags: 0

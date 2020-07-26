@@ -15,6 +15,7 @@ public class UIManager : MonoBehaviour
 	private Text _credits;
 
 	private Player _player;
+	private Table _table;
 
 	private int _maxWager;
 	private int _wagerInt;
@@ -22,11 +23,14 @@ public class UIManager : MonoBehaviour
     void Start()
     {
 		_player = GameObject.Find("Player").GetComponent<Player>();
+		_table = GameObject.Find("Canvas").GetComponent<Table>();
+
+		if (_table == null) print("table is null");
 
 		if (_player != null)
 		{
 			_credits.text = "CREDITS     " + _player.GetCredits();
-			_maxWager = _player.GetMaxWager();
+			_maxWager = 5;//change this later to player.getmaxwager()
 
 		}
 		_wagerInt = 0;
@@ -46,20 +50,30 @@ public class UIManager : MonoBehaviour
 		if( n >= 0 && n < _heldText.Length)
 		{
 			if (_heldText[n].gameObject.activeSelf == false)
+			{
 				_heldText[n].gameObject.SetActive(true);
+				_table.SetIsSelected(n, true);
+			}
 			else
+			{
 				_heldText[n].gameObject.SetActive(false);
+				_table.SetIsSelected(n, false);
+			}
 		}
 
 		
 	}
 	public void AddWager()
 	{
-		if(_wagerInt != _maxWager)
+		//print("isbeingcalled");
+		print("max"+_maxWager);
+		print("wager" + _wagerInt);
+
+		if(_wagerInt < _maxWager)
 			_wagerInt++;
 
 		_wager.text = "WAGER    " + _wagerInt;
-		_player.SetWager();
+		_player.AddWager();
 	}
     // Update is called once per frame
     void Update()
