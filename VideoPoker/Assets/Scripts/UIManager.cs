@@ -128,8 +128,10 @@ public class UIManager : MonoBehaviour
 	public void AddWager()
 	{
 
-		if(_wagerInt < _maxWager)
+		if (_wagerInt < _maxWager)
 			_wagerInt++;
+		else
+			_wagerInt = 0;
 
 		_wager.text = "WAGER    " + _wagerInt;
 		_player.AddWager();

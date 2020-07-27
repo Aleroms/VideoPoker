@@ -137,6 +137,7 @@ public class GameManager : MonoBehaviour
 	void GameOver()
 	{
 		print("Game Over");
+		Application.Quit();
 	}
 
 }
