@@ -11,7 +11,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-		_credits = 100;
+		//_credits = 100;
+		_credits = Credits.GetCredits();
 		_wager = 0;
 		
     }

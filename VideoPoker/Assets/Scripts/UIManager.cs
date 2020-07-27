@@ -8,11 +8,21 @@ public class UIManager : MonoBehaviour
 	[SerializeField]
 	private Text[] _heldText;
 	[SerializeField]
+	private Button[] _holdButtons;
+	[SerializeField]
 	private Text _wager;
 	[SerializeField]
 	private Text _win;
 	[SerializeField]
 	private Text _credits;
+	[SerializeField]
+	private Text _winningHandText;
+	[SerializeField]
+	private Button _betButton;
+	[SerializeField]
+	private Button _dealButton;
+	[SerializeField]
+	private Button _drawButton;
 
 	private Player _player;
 	private Table _table;
@@ -36,8 +46,38 @@ public class UIManager : MonoBehaviour
 		_wagerInt = 0;
 		_wager.text = "WAGER    " + _wagerInt;
 		_win.gameObject.SetActive(false);
+		_winningHandText.gameObject.SetActive(false);
 		OnDisableText();
+
+		SetInteractableButtons(false);
+		
     }
+	public void DisplayEarnings(int earnings, string winningHand)
+	{
+		_win.text = "WIN    " + earnings;
+		_win.gameObject.SetActive(true);
+
+		_winningHandText.text = winningHand;
+		_winningHandText.gameObject.SetActive(true);
+
+		_credits.text = "CREDITS    " + _player.GetCredits();
+	}
+	public void LoseCondition(int credits)
+	{
+		_credits.text = "CREDITS    " + credits;
+
+		_winningHandText.gameObject.SetActive(true);
+		_winningHandText.text = "YOU LOSE";
+	}
+	public void SetInteractableButtons(bool interactable)
+	{
+		for (int i = 0; i < _holdButtons.Length; i++)
+		{
+			_holdButtons[i].interactable = interactable;
+		}
+
+		
+	}
 	public void OnDisableText()
 	{
 		for(int i=0; i < _heldText.Length; i++)
@@ -63,6 +103,14 @@ public class UIManager : MonoBehaviour
 
 		
 	}
+	public void Reset()
+	{
+		_wager.text = "WAGER    " + 0;
+		_winningHandText.gameObject.SetActive(false);
+		_win.gameObject.SetActive(false);
+		//_betButton.interactable = true;
+
+	}
 	public void AddWager()
 	{
 
@@ -72,9 +120,17 @@ public class UIManager : MonoBehaviour
 		_wager.text = "WAGER    " + _wagerInt;
 		_player.AddWager();
 	}
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public void DealDraw()
+	{
+		_dealButton.gameObject.SetActive(false);
+		_drawButton.gameObject.SetActive(true);
+		_betButton.interactable = false;
+	}
+	public void DrawDeal()
+	{
+		_dealButton.gameObject.SetActive(true);
+		_drawButton.gameObject.SetActive(false);
+		_betButton.interactable = true;
+	}
+  
 }

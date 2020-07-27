@@ -33,9 +33,9 @@ public class Table : MonoBehaviour
 		if (_uim == null)
 			print("uim is null");
 
-		SetDisplayCards();
+		//SetDisplayCards();//CAUSES OUTOFBOUNDS_EXCEPTION
 	}
-	void SetDisplayCards()
+	public void SetDisplayCards()
 	{
 		
 
@@ -72,7 +72,8 @@ public class Table : MonoBehaviour
 				_discardPile.Add(_displayedCards[i]);
 				_selectedCards.Add(_deck.GetSelection());
 				_selectedCards[i].transform.position = slot[i].transform.position;
-				_displayedCards[i].gameObject.SetActive(false);
+				//_displayedCards[i].gameObject.SetActive(false);
+				_displayedCards[i].transform.position = new Vector3(-12, 0);
 
 			}
 		}
@@ -81,7 +82,18 @@ public class Table : MonoBehaviour
 	{
 		return _selectedCards;
 	}
-	
+	public void Reset()
+	{
+		for (int i = 0; i < _displayedCards.Count; i++)
+			_displayedCards[i].transform.position = new Vector3(-12, 0);
+
+		_selectedCards.Clear();
+		_displayedCards.Clear();
+
+		_deck.Reset();
+
+		SetDisplayCards();
+	}
 
 
 }

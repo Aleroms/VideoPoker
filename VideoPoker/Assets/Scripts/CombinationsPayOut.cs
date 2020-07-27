@@ -14,12 +14,49 @@ public class CombinationsPayOut : MonoBehaviour
 	{
 		_selectedCards = new List<GameObject>();
 		_pairChecker = new List<int>();
-		//_playerWon = false;
 		_highestPair = "default";
 	}
 	public string GetWinningHand()
 	{
 		return _highestPair;
+	}
+	public int GetPayOut()
+	{
+		int payout = 0;
+
+		switch(_highestPair)
+		{
+			case "RoyalFlush":
+				payout = 800;
+				break;
+			case "StraightFlush":
+				payout = 50;
+				break;
+			case "FourOfAKind":
+				payout = 25;
+				break;
+			case "FullHouse":
+				payout = 9;
+				break;
+			case "Flush":
+				payout = 6;
+				break;
+			case "Straight":
+				payout = 4;
+				break;
+			case "ThreeOfAKind":
+				payout = 3;
+				break;
+			case "TwoPairs":
+				payout = 2;
+				break;
+			case "JacksOrBetter":
+				payout = 1;
+				break;
+
+		}
+
+		return payout;
 	}
 	public bool CheckCards(List<GameObject> selected)
 	{
@@ -141,7 +178,6 @@ public class CombinationsPayOut : MonoBehaviour
 	}
 	bool CheckForQuad()
 	{
-		//ResetCheckers();
 
 		bool p0123, p1234;
 
@@ -155,7 +191,6 @@ public class CombinationsPayOut : MonoBehaviour
 	}
 	bool CheckForThreeK()
 	{
-		//ResetCheckers();
 
 
 		bool p012, p123, p234;
@@ -169,7 +204,6 @@ public class CombinationsPayOut : MonoBehaviour
 	
 	bool CheckForPair()
 	{
-		//ResetCheckers();
 		
 		bool p0123;
 		bool p1234;
@@ -185,7 +219,7 @@ public class CombinationsPayOut : MonoBehaviour
 	
 	bool CheckForFlush()
 	{
-		//ResetCheckers();
+		
 		string _suitChecker;
 
 		_card = _selectedCards[0].GetComponent<Cards>();
@@ -204,7 +238,5 @@ public class CombinationsPayOut : MonoBehaviour
 		
 		return true;
 	}
-    // Start is called before the first frame update
-    
-
+ 
 }

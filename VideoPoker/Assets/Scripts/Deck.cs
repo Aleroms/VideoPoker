@@ -23,10 +23,10 @@ public class Deck : MonoBehaviour
     {
 		//_deck = new List<Cards>();
 		_deck2 = new List<GameObject>();
-		_deck3 = new Stack<GameObject>();
+		//_deck3 = new Stack<GameObject>();
 		//_deck4 = new Queue<GameObject>();
 		GenerateDeck();
-		Shuffle();
+		_deck3 = Shuffle();
 
 		/*for(int i = 0; i < _deck2.Count; i++)
 		{
@@ -65,15 +65,12 @@ public class Deck : MonoBehaviour
 
 		}
 	}
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-	void Shuffle()
+   
+	Stack<GameObject> Shuffle()
 	{
 		int randIndex;
-		//randomize then assign
+		Stack<GameObject> tempStack = new Stack<GameObject>();
+
 		for(int i=0; i < _deck2.Count; i++)
 		{
 			GameObject temp = _deck2[i];
@@ -86,9 +83,10 @@ public class Deck : MonoBehaviour
 
 			_deck2[randIndex] = temp;
 
-			_deck3.Push(_deck2[i]);
+			tempStack.Push(_deck2[i]);
 
 		}
+		return tempStack;
 	}
 	public GameObject GetSelection()
 	{
@@ -99,6 +97,11 @@ public class Deck : MonoBehaviour
 		GameObject t = _deck2[0];
 		_deck2.RemoveAt(0);
 		return t;*/
+	}
+	public void Reset()
+	{
+		_deck3.Clear();
+		_deck3 = Shuffle();
 	}
 }
 

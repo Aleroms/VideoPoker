@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-	private int _playerCredits;
+	private static int _playerCredits;
 	private int _playerWager;
+	private bool _restart;
 	private Player _player;
 	private Table _table;
+	private UIManager _UIManager;
 	private CombinationsPayOut _cpo;
-	public GameManager instance;
+	public static GameManager instance;
 	
 	
 	void Awake()
@@ -22,10 +25,14 @@ public class GameManager : MonoBehaviour
 		_player = GameObject.Find("Player").GetComponent<Player>();
 		_table = GameObject.Find("Canvas").GetComponent<Table>();
 		_cpo = GameObject.Find("GameManager").GetComponent<CombinationsPayOut>();
+		_UIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 
 		if (_table == null) print("table is null");
 		if (_player == null) print("player is null");
 		if (_cpo == null) print("combination is null");
+		if (_UIManager == null) print("UIManager is null");
+
+		_restart = false;
 	}
 	void Start()
 	{
@@ -33,33 +40,93 @@ public class GameManager : MonoBehaviour
 		_playerCredits = _player.GetCredits();
 		
 	}
-	void Update()
-	{
-
-	}
-
-	public void Deal()
+	
+	public void Draw()
 	{
 		_playerCredits = _player.GetCredits();
 
 		if (_playerCredits > 0)
 		{
 			_playerWager = _player.GetWager();
-			_table.Play();
 
-			if (_cpo.CheckCards(_table.GetSelectedCards()))
+			if (_playerWager > 0)
 			{
-				print("you won: "+_cpo.GetWinningHand());
+				PlayGame();
+				_restart = true;
 			}
 			else
-				LoseCondition();
+			{
+				print("PLEASE BET");
+			}
+
 		}
 		else
 			GameOver();
 
+		_UIManager.DrawDeal();
+
+	}
+	public void Deal()
+	{
+		if (_restart == false)
+		{
+			//if player placed a bet
+			_playerWager = _player.GetWager();
+
+			if (_playerWager > 0)
+			{
+				_table.SetDisplayCards();
+				_UIManager.DealDraw();
+				
+			}
+			else
+			{
+				print("PLEASE BET");
+			}		
+		}
+		else
+		{
+			RestartMatch();
+			print("restarting...");
+		}
+	}
+	void RestartMatch()
+	{
+		Credits.SetCredits(_playerCredits);
+
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		
+		//_table.Reset();
+		//_UIManager.Reset();
+		//_restart = false;
+	}
+	void PlayGame()
+	{
+		//_table.SetDisplayCards();
+		_table.Play();
+
+		
+
+		if (_cpo.CheckCards(_table.GetSelectedCards()))
+		{
+			int payout = _playerWager * _cpo.GetPayOut();
+
+			_player.AddCredits(payout);
+			_playerCredits = _player.GetCredits();
+
+			_UIManager.DisplayEarnings(payout, _cpo.GetWinningHand());
+
+			//x
+		}
+		else
+			LoseCondition();
 	}
 	void LoseCondition()
 	{
+		_player.SubCredits(_playerWager);
+		_playerCredits = _player.GetCredits();
+
+		_UIManager.LoseCondition(_playerCredits);
 		print("you lost");
 	}
 	void GameOver()
@@ -67,3 +134,7 @@ public class GameManager : MonoBehaviour
 		print("Game Over");
 	}
 }
+//print("you won: " + _cpo.GetWinningHand());
+//print("wager: " + _playerWager);
+//print("earings: " + _cpo.GetPayOut());
+//print("Win: " + _cpo.GetPayOut() * _playerWager);
