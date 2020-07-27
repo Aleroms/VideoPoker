@@ -16,10 +16,12 @@ public class CombinationsPayOut : MonoBehaviour
 		_pairChecker = new List<int>();
 		_highestPair = "default";
 	}
+
 	public string GetWinningHand()
 	{
 		return _highestPair;
 	}
+
 	public int GetPayOut()
 	{
 		int payout = 0;
@@ -107,6 +109,7 @@ public class CombinationsPayOut : MonoBehaviour
 		//player lost
 		return false;
 	}
+
 	List<int> GetSortedRankList()
 	{
 		List<int> pc = new List<int>();
@@ -120,6 +123,7 @@ public class CombinationsPayOut : MonoBehaviour
 
 		return pc;
 	}
+
 	bool CheckForFullHouse()
 	{
 		bool p34,p01;
@@ -129,6 +133,7 @@ public class CombinationsPayOut : MonoBehaviour
 
 		return CheckForThreeK() && p34 || CheckForThreeK() && p01;
 	}
+
 	bool CheckForJacksOrBetter()
 	{
 		int highCard = 0;
@@ -141,10 +146,12 @@ public class CombinationsPayOut : MonoBehaviour
 
 		return highCard > 1;
 	}
+
 	bool CheckForStraightFlush()
 	{
 		return CheckForFlush() && CheckForStraight();
 	}
+
 	bool StraightHelper(int r)
 	{
 		for (int i = 1; i < _pairChecker.Count; i++)
@@ -158,6 +165,7 @@ public class CombinationsPayOut : MonoBehaviour
 		}
 		return true;
 	}
+
 	bool CheckForRoyalFlush()
 	{
 		int r = 10;
@@ -170,12 +178,14 @@ public class CombinationsPayOut : MonoBehaviour
 
 		return temp;
 	}
+
 	bool CheckForStraight()
 	{
 		int r = _pairChecker[0] + 1;
 
 		return StraightHelper(r);
 	}
+
 	bool CheckForQuad()
 	{
 
@@ -189,6 +199,7 @@ public class CombinationsPayOut : MonoBehaviour
 
 		return p0123 || p1234;
 	}
+
 	bool CheckForThreeK()
 	{
 

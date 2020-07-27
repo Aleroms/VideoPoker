@@ -5,12 +5,12 @@ using UnityEngine;
 public class Cards : MonoBehaviour
 {
 	public enum Suit { CLUB, DIAMOND, HEART, SPADE};
-	[SerializeField]
+	
 	private Suit _suit;
-	[SerializeField]
+	
 	private int _rank;
 
-	//remove serializeField when submitting
+	
     public Suit GetSuit()
 	{
 		return _suit;
@@ -34,12 +34,12 @@ public class Cards : MonoBehaviour
 		if (i == 3)
 			_suit = Suit.SPADE;
 
-		//print(_suit);
+		
 	}
 	public void setRank(int n)
 	{
 		_rank = n;
-		//print("_rank now =" + _rank);
+		
 	}
 
 }

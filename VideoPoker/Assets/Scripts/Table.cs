@@ -4,26 +4,32 @@ using UnityEngine;
 
 public class Table : MonoBehaviour
 {
-	[SerializeField]
+	
 	private List<GameObject> _selectedCards;
 	private List<GameObject> _displayedCards;
 	private List<GameObject> _discardPile;
 
 	[SerializeField]
 	private Transform[] slot;
+
 	[SerializeField]
 	private bool[] _isSelected;
+
 	private Deck _deck;
 	private UIManager _uim;
 
 	private int _handSize;
-	// Start is called before the first frame update
+	
 	void Start()
 	{
 		_handSize = 5;
+
 		_isSelected = new bool[_handSize];
+
+		_selectedCards = new List<GameObject>();
 		_displayedCards = new List<GameObject>();
 		_discardPile = new List<GameObject>();
+
 		_deck = GameObject.Find("Deck").GetComponent<Deck>();
 		_uim = GameObject.Find("Canvas").GetComponent<UIManager>();
 
@@ -33,7 +39,7 @@ public class Table : MonoBehaviour
 		if (_uim == null)
 			print("uim is null");
 
-		//SetDisplayCards();//CAUSES OUTOFBOUNDS_EXCEPTION
+		
 	}
 	public void SetDisplayCards()
 	{
@@ -44,10 +50,11 @@ public class Table : MonoBehaviour
 			_displayedCards.Add(_deck.GetSelection());
 			_displayedCards[i].transform.position = slot[i].transform.position;
 			_isSelected[i] = false;
-			print(_displayedCards[i].name);//delete after done
+			
 		}
 
 	}
+
 	public void SetIsSelected(int n, bool truth)
 	{
 		if (truth)
@@ -55,6 +62,7 @@ public class Table : MonoBehaviour
 		else
 			_isSelected[n] = false;
 	}
+
 	public void Play()
 	{
 		_uim.OnDisableText();
@@ -65,23 +73,27 @@ public class Table : MonoBehaviour
 			if(_isSelected[i] == true)
 			{
 				_selectedCards.Add(_displayedCards[i]);
-				//print(_selectedCards.Count);
 			}
 			else
 			{
 				_discardPile.Add(_displayedCards[i]);
+
+
 				_selectedCards.Add(_deck.GetSelection());
 				_selectedCards[i].transform.position = slot[i].transform.position;
-				//_displayedCards[i].gameObject.SetActive(false);
+
+
 				_displayedCards[i].transform.position = new Vector3(-12, 0);
 
 			}
 		}
+
 	}
 	public List<GameObject> GetSelectedCards()
 	{
 		return _selectedCards;
 	}
+
 	public void Reset()
 	{
 		for (int i = 0; i < _displayedCards.Count; i++)

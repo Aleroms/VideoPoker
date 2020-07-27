@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
 
 		_restart = false;
 	}
+
 	void Start()
 	{
 		_player.SetMaxWager(5);
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
 		_UIManager.DrawDeal();
 
 	}
+
 	public void Deal()
 	{
 		if (_restart == false)
@@ -90,6 +92,7 @@ public class GameManager : MonoBehaviour
 			print("restarting...");
 		}
 	}
+
 	void RestartMatch()
 	{
 		Credits.SetCredits(_playerCredits);
@@ -100,9 +103,10 @@ public class GameManager : MonoBehaviour
 		//_UIManager.Reset();
 		//_restart = false;
 	}
+
 	void PlayGame()
 	{
-		//_table.SetDisplayCards();
+
 		_table.Play();
 
 		
@@ -116,25 +120,23 @@ public class GameManager : MonoBehaviour
 
 			_UIManager.DisplayEarnings(payout, _cpo.GetWinningHand());
 
-			//x
 		}
 		else
 			LoseCondition();
 	}
+
 	void LoseCondition()
 	{
 		_player.SubCredits(_playerWager);
 		_playerCredits = _player.GetCredits();
 
 		_UIManager.LoseCondition(_playerCredits);
-		print("you lost");
+		
 	}
+
 	void GameOver()
 	{
 		print("Game Over");
 	}
+
 }
-//print("you won: " + _cpo.GetWinningHand());
-//print("wager: " + _playerWager);
-//print("earings: " + _cpo.GetPayOut());
-//print("Win: " + _cpo.GetPayOut() * _playerWager);

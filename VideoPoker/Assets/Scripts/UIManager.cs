@@ -7,20 +7,28 @@ public class UIManager : MonoBehaviour
 {
 	[SerializeField]
 	private Text[] _heldText;
-	[SerializeField]
-	private Button[] _holdButtons;
+
 	[SerializeField]
 	private Text _wager;
+
 	[SerializeField]
 	private Text _win;
+
 	[SerializeField]
 	private Text _credits;
+
 	[SerializeField]
 	private Text _winningHandText;
+
+	[SerializeField]
+	private Button[] _holdButtons;
+
 	[SerializeField]
 	private Button _betButton;
+
 	[SerializeField]
 	private Button _dealButton;
+
 	[SerializeField]
 	private Button _drawButton;
 
@@ -29,7 +37,7 @@ public class UIManager : MonoBehaviour
 
 	private int _maxWager;
 	private int _wagerInt;
-    // Start is called before the first frame update
+    
     void Start()
     {
 		_player = GameObject.Find("Player").GetComponent<Player>();
@@ -40,7 +48,7 @@ public class UIManager : MonoBehaviour
 		if (_player != null)
 		{
 			_credits.text = "CREDITS     " + _player.GetCredits();
-			_maxWager = 5;//change this later to player.getmaxwager()
+			_maxWager = 5;
 
 		}
 		_wagerInt = 0;
@@ -52,6 +60,7 @@ public class UIManager : MonoBehaviour
 		SetInteractableButtons(false);
 		
     }
+
 	public void DisplayEarnings(int earnings, string winningHand)
 	{
 		_win.text = "WIN    " + earnings;
@@ -62,6 +71,7 @@ public class UIManager : MonoBehaviour
 
 		_credits.text = "CREDITS    " + _player.GetCredits();
 	}
+
 	public void LoseCondition(int credits)
 	{
 		_credits.text = "CREDITS    " + credits;
@@ -69,6 +79,7 @@ public class UIManager : MonoBehaviour
 		_winningHandText.gameObject.SetActive(true);
 		_winningHandText.text = "YOU LOSE";
 	}
+
 	public void SetInteractableButtons(bool interactable)
 	{
 		for (int i = 0; i < _holdButtons.Length; i++)
@@ -78,6 +89,7 @@ public class UIManager : MonoBehaviour
 
 		
 	}
+
 	public void OnDisableText()
 	{
 		for(int i=0; i < _heldText.Length; i++)
@@ -85,6 +97,7 @@ public class UIManager : MonoBehaviour
 			_heldText[i].gameObject.SetActive(false);
 		}
 	}
+
 	public void UserSelect(int n)
 	{
 		if( n >= 0 && n < _heldText.Length)
@@ -103,14 +116,15 @@ public class UIManager : MonoBehaviour
 
 		
 	}
+
 	public void Reset()
 	{
 		_wager.text = "WAGER    " + 0;
 		_winningHandText.gameObject.SetActive(false);
 		_win.gameObject.SetActive(false);
-		//_betButton.interactable = true;
 
 	}
+
 	public void AddWager()
 	{
 
@@ -120,12 +134,14 @@ public class UIManager : MonoBehaviour
 		_wager.text = "WAGER    " + _wagerInt;
 		_player.AddWager();
 	}
+
 	public void DealDraw()
 	{
 		_dealButton.gameObject.SetActive(false);
 		_drawButton.gameObject.SetActive(true);
 		_betButton.interactable = false;
 	}
+
 	public void DrawDeal()
 	{
 		_dealButton.gameObject.SetActive(true);
