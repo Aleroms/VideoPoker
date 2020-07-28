@@ -39,7 +39,7 @@ public class Table : MonoBehaviour
 		if (_uim == null)
 			print("uim is null");
 
-		
+		SetDisplayCards();
 	}
 	public void SetDisplayCards()
 	{

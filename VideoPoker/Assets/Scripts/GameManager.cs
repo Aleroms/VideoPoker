@@ -77,7 +77,7 @@ public class GameManager : MonoBehaviour
 
 			if (_playerWager > 0)
 			{
-				_table.SetDisplayCards();
+				//_table.SetDisplayCards(); 7/27
 				_UIManager.DealDraw();
 				
 			}

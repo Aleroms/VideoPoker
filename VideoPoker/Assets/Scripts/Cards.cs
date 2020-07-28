@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class Cards : MonoBehaviour
 {
+	
 	public enum Suit { CLUB, DIAMOND, HEART, SPADE};
-	
+
+	[SerializeField]
 	private Suit _suit;
-	
+
+	[SerializeField]
 	private int _rank;
 
 	
@@ -22,6 +25,7 @@ public class Cards : MonoBehaviour
 	
 	public void setSuit(int i)
 	{
+		
 		if (i == 0)
 			_suit = Suit.CLUB;
 
@@ -34,11 +38,13 @@ public class Cards : MonoBehaviour
 		if (i == 3)
 			_suit = Suit.SPADE;
 
-		
+		//print(_suit);
 	}
 	public void setRank(int n)
 	{
-		_rank = n;
+		//change back to n
+		_rank = n + 1;
+		//print(_rank);
 		
 	}
 

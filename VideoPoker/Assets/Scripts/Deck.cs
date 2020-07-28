@@ -29,6 +29,7 @@ public class Deck : MonoBehaviour
 		
     }
 	
+	
    
 	Stack<GameObject> Shuffle()
 	{
@@ -58,35 +59,53 @@ public class Deck : MonoBehaviour
 	}
 
 	public void Reset()
-	{
-		_deck3.Clear();
-		_deck3 = Shuffle();
+	{ 
+		/*
+		for(int i = 0; i < _deck2.Count; i++)
+		{
+			Destroy(_deck2[i]);
+			Destroy(_deck3.Pop());
+
+		}
+		_deck2 = new List<GameObject>();
+		*/
+		//_deck3.Clear();
+		//_deck3 = Shuffle();
+		
 	}
 
 	void GenerateDeck()
 	{
+
 		int spriteIndex = 0;
+		int deckIndex = 0;
 
 		for (int i = 0; i < 4; i++)
 		{
 
-
-			for (int j = 1; j < 14; j++)
+			
+			for (int j = 0; j < 13; j++)
 			{
-				GameObject tempCard = Instantiate(_cardPrefab, transform.position, Quaternion.identity);
-				Cards temp = tempCard.GetComponent<Cards>();
+				
+				_deck2.Add(Instantiate(_cardPrefab, transform.position, Quaternion.identity));
+				Cards tempCard = _deck2[deckIndex].GetComponent<Cards>();
 
+				if (tempCard != null)
+				{
+					tempCard.setSuit(i);
+					tempCard.setRank(j);
 
-				temp.setSuit(i);
-				temp.setRank(j);
-				tempCard.GetComponent<SpriteRenderer>().sprite = _cardFaces[spriteIndex];
+					_deck2[deckIndex].name = tempCard.GetSuit().ToString() + tempCard.GetRank().ToString();
+				}
+				
 
-				tempCard.transform.parent = _deckContainer.transform;
-				tempCard.name = temp.GetSuit().ToString() + temp.GetRank().ToString();
+				_deck2[deckIndex].GetComponent<SpriteRenderer>().sprite = _cardFaces[spriteIndex];
 
+				_deck2[deckIndex].transform.parent = _deckContainer.transform;
 
-				_deck2.Add(tempCard);
+				deckIndex++;
 				spriteIndex++;
+				
 
 			}
 
