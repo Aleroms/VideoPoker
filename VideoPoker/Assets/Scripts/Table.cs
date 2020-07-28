@@ -16,11 +16,11 @@ public class Table : MonoBehaviour
 	private bool[] _isSelected;
 
 	private Deck _deck;
-	private UIManager _uim;
+	//private UIManager _uim;
 
 	private int _handSize;
 	
-	void Start()
+	public void StartGame()
 	{
 		_handSize = 5;
 
@@ -31,16 +31,17 @@ public class Table : MonoBehaviour
 		_discardPile = new List<GameObject>();
 
 		_deck = GameObject.Find("Deck").GetComponent<Deck>();
-		_uim = GameObject.Find("Canvas").GetComponent<UIManager>();
+		//_uim = GameObject.Find("Canvas").GetComponent<UIManager>();
 
 		if (_deck == null)
 			print("deck ref is null");
 
-		if (_uim == null)
-			print("uim is null");
+		//if (_uim == null)
+		//print("uim is null");
 
 		SetDisplayCards();
 	}
+
 	public void SetDisplayCards()
 	{
 		
@@ -65,7 +66,8 @@ public class Table : MonoBehaviour
 
 	public void Play()
 	{
-		_uim.OnDisableText();
+		//find a better place to call this method so i don't need a reference to this script
+		//_uim.OnDisableText();
 		int num = _displayedCards.Count;
 
 		for(int i = 0; i < num; i++)

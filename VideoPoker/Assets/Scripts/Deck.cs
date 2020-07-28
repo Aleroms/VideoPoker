@@ -15,22 +15,20 @@ public class Deck : MonoBehaviour
 	
 
 	private List<GameObject> _deck2;
+	private Stack<GameObject> _deck3;
+
 	private Cards _card;
 
-	private Stack<GameObject> _deck3;
-	
-    void Awake()
-    {
-
+	public void StartGame()
+	{
 		_deck2 = new List<GameObject>();
-		
+
 		GenerateDeck();
 		_deck3 = Shuffle();
-		
-    }
-	
-	
-   
+
+	}
+
+
 	Stack<GameObject> Shuffle()
 	{
 		int randIndex;
@@ -60,15 +58,17 @@ public class Deck : MonoBehaviour
 
 	public void Reset()
 	{ 
-		/*
 		for(int i = 0; i < _deck2.Count; i++)
-		{
 			Destroy(_deck2[i]);
+
+
+		for (int i = 0; i < _deck3.Count; i++)
 			Destroy(_deck3.Pop());
 
-		}
+
 		_deck2 = new List<GameObject>();
-		*/
+		_deck3 = new Stack<GameObject>();
+		
 		//_deck3.Clear();
 		//_deck3 = Shuffle();
 		

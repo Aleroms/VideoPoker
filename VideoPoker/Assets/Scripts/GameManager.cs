@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 	private static int _playerCredits;
 	private int _playerWager;
 	private bool _restart;
+	private Deck _deck;
 	private Player _player;
 	private Table _table;
 	private UIManager _UIManager;
@@ -22,6 +23,7 @@ public class GameManager : MonoBehaviour
 		else
 			Destroy(this);
 
+		_deck = GameObject.Find("Deck").GetComponent<Deck>();
 		_player = GameObject.Find("Player").GetComponent<Player>();
 		_table = GameObject.Find("Canvas").GetComponent<Table>();
 		_cpo = GameObject.Find("GameManager").GetComponent<CombinationsPayOut>();
@@ -37,6 +39,11 @@ public class GameManager : MonoBehaviour
 
 	void Start()
 	{
+		_deck.StartGame();
+		_player.StartGame();
+		_UIManager.StartGame();
+		_table.StartGame();
+
 		_player.SetMaxWager(5);
 		_playerCredits = _player.GetCredits();
 		
@@ -95,9 +102,10 @@ public class GameManager : MonoBehaviour
 
 	void RestartMatch()
 	{
-		Credits.SetCredits(_playerCredits);
 
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+		//Credits.SetCredits(_playerCredits);
+
+		//SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		
 		//_table.Reset();
 		//_UIManager.Reset();
@@ -106,7 +114,7 @@ public class GameManager : MonoBehaviour
 
 	void PlayGame()
 	{
-
+		_UIManager.OnDisableText();
 		_table.Play();
 
 		

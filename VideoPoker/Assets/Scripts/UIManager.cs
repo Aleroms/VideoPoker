@@ -38,8 +38,9 @@ public class UIManager : MonoBehaviour
 	private int _maxWager;
 	private int _wagerInt;
     
-    void Start()
-    {
+	public void StartGame()
+	{
+
 		_player = GameObject.Find("Player").GetComponent<Player>();
 		_table = GameObject.Find("Canvas").GetComponent<Table>();
 
@@ -58,8 +59,8 @@ public class UIManager : MonoBehaviour
 		OnDisableText();
 
 		SetInteractableButtons(false);
-		
-    }
+
+	}
 
 	public void DisplayEarnings(int earnings, string winningHand)
 	{

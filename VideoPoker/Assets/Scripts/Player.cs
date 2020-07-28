@@ -9,13 +9,12 @@ public class Player : MonoBehaviour
 	private int _wager;
 
   
-    void Awake()
-    {
+	public void StartGame()
+	{
 		//_credits = 100;
 		_credits = Credits.GetCredits();
 		_wager = 0;
-		
-    }
+	}
 
 	public void AddCredits(int n)
 	{
