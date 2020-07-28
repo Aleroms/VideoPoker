@@ -15,6 +15,7 @@ public class Deck : MonoBehaviour
 	
 
 	private List<GameObject> _deck2;
+	private List<GameObject> _discardPile;
 	private Stack<GameObject> _deck3;
 
 	private Cards _card;
@@ -22,6 +23,7 @@ public class Deck : MonoBehaviour
 	public void StartGame()
 	{
 		_deck2 = new List<GameObject>();
+		_discardPile = new List<GameObject>();
 
 		GenerateDeck();
 		_deck3 = Shuffle();
@@ -53,21 +55,35 @@ public class Deck : MonoBehaviour
 
 	public GameObject GetSelection()
 	{
+		_discardPile.Add(_deck3.Peek());
 		return _deck3.Pop();
 	}
 
 	public void Reset()
-	{ 
+	{
 		for(int i = 0; i < _deck2.Count; i++)
-			Destroy(_deck2[i]);
+		{
+			Destroy(_deck2[i].gameObject);
+		}
+		_deck2 = new List<GameObject>();
+		GenerateDeck();
+		_deck3 = Shuffle();
+		/*
+		for (int i = 0; i < _discardPile.Count; i++)
+			_deck3.Push(_discardPile[i]);
 
 
 		for (int i = 0; i < _deck3.Count; i++)
-			Destroy(_deck3.Pop());
+		{
+			print("Destroy(" + _deck3.Peek() + ")");
+			Destroy(_deck3.Pop());//issue may be that it is the only reference
+		}
 
 
-		_deck2 = new List<GameObject>();
+		//_deck2 = new List<GameObject>();
 		_deck3 = new Stack<GameObject>();
+		_deck3 = Shuffle();
+		*/
 		
 		//_deck3.Clear();
 		//_deck3 = Shuffle();

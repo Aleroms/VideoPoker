@@ -47,6 +47,57 @@ public class GameManager : MonoBehaviour
 		_player.SetMaxWager(5);
 		_playerCredits = _player.GetCredits();
 		
+	}//changed the button from deal to playhand
+	public void PlayHand()
+	{
+		_playerCredits = _player.GetCredits();
+
+		if (_playerCredits > 0)
+		{
+			_playerWager = _player.GetWager();
+
+			if (_playerWager > 0)
+			{
+				//add new if statement here to flip hidden cards && check if flipped cards or not
+				if(true)
+				{
+					if (_restart == false)
+					{
+
+						//_table.SetDisplayCards(); 7/27
+						_UIManager.DealDraw();
+						PlayGame();
+						_restart = true;
+
+					}
+					else
+					{
+						RestartMatch();
+						_restart = false;
+						print("restarting...");
+					}
+
+					//_isFlipped = true;
+				}
+				else
+				{
+
+				}
+				
+
+				
+			}
+			else
+			{
+				print("PLEASE BET");
+			}
+
+		}
+		else
+			GameOver();
+
+		_UIManager.DrawDeal();
+
 	}
 	
 	public void Draw()
@@ -102,7 +153,10 @@ public class GameManager : MonoBehaviour
 
 	void RestartMatch()
 	{
-
+		_deck.Reset();
+		_table.Reset();
+		_UIManager.Reset();
+		_table.SetDisplayCards();
 		//Credits.SetCredits(_playerCredits);
 
 		//SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -114,6 +168,7 @@ public class GameManager : MonoBehaviour
 
 	void PlayGame()
 	{
+		//print("name");
 		_UIManager.OnDisableText();
 		_table.Play();
 

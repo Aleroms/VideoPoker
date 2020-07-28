@@ -6,6 +6,7 @@ public class Table : MonoBehaviour
 {
 	
 	private List<GameObject> _selectedCards;
+	[SerializeField]
 	private List<GameObject> _displayedCards;
 	private List<GameObject> _discardPile;
 
@@ -41,17 +42,23 @@ public class Table : MonoBehaviour
 
 		SetDisplayCards();
 	}
-
+	
 	public void SetDisplayCards()
 	{
 		
 
 		for(int i = 0; i < _handSize; i++)
 		{
+
 			_displayedCards.Add(_deck.GetSelection());
 			_displayedCards[i].transform.position = slot[i].transform.position;
 			_isSelected[i] = false;
-			
+
+			/*
+			_displayedCards.Add(_deck.GetSelection());
+			_displayedCards[i].transform.position = slot[i].transform.position;
+			_isSelected[i] = false;
+			*/
 		}
 
 	}
@@ -66,8 +73,7 @@ public class Table : MonoBehaviour
 
 	public void Play()
 	{
-		//find a better place to call this method so i don't need a reference to this script
-		//_uim.OnDisableText();
+		
 		int num = _displayedCards.Count;
 
 		for(int i = 0; i < num; i++)
@@ -78,15 +84,17 @@ public class Table : MonoBehaviour
 			}
 			else
 			{
-				_discardPile.Add(_displayedCards[i]);
+				
+				
+				//_discardPile.Add(_displayedCards[i]);
 
 
 				_selectedCards.Add(_deck.GetSelection());
 				_selectedCards[i].transform.position = slot[i].transform.position;
 
 
-				_displayedCards[i].transform.position = new Vector3(-12, 0);
-
+				_displayedCards[i].transform.position = new Vector3(-12,5);
+			
 			}
 		}
 
@@ -98,6 +106,14 @@ public class Table : MonoBehaviour
 
 	public void Reset()
 	{
+
+		_displayedCards = new List<GameObject>();
+		_selectedCards = new List<GameObject>();
+
+		print("displayCards count:" + _displayedCards.Count);
+		
+
+		/*
 		for (int i = 0; i < _displayedCards.Count; i++)
 			_displayedCards[i].transform.position = new Vector3(-12, 0);
 
@@ -106,7 +122,7 @@ public class Table : MonoBehaviour
 
 		_deck.Reset();
 
-		SetDisplayCards();
+		SetDisplayCards();*/
 	}
 
 

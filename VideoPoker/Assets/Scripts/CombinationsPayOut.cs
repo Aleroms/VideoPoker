@@ -80,6 +80,11 @@ public class CombinationsPayOut : MonoBehaviour
 			_highestPair = "FourOfAKind";
 			return true;
 		}
+		else if(CheckForFullHouse())
+		{
+			_highestPair = "FullHouse";
+			return true;
+		}
 		else if (CheckForFlush())
 		{
 			_highestPair = "Flush";
@@ -127,6 +132,8 @@ public class CombinationsPayOut : MonoBehaviour
 	bool CheckForFullHouse()
 	{
 		bool p34,p01;
+
+		
 
 		p34 = _pairChecker[3] == _pairChecker[4];
 		p01 = _pairChecker[0] == _pairChecker[1];
