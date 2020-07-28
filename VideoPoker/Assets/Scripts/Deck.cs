@@ -13,6 +13,7 @@ public class Deck : MonoBehaviour
 	[SerializeField]
 	private Sprite[] _cardFaces;
 	
+	
 
 	private List<GameObject> _deck2;
 	private List<GameObject> _discardPile;

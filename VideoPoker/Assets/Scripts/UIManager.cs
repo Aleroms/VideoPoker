@@ -27,6 +27,9 @@ public class UIManager : MonoBehaviour
 	private Button _betButton;
 
 	[SerializeField]
+	private Button _maxBetButton;
+
+	[SerializeField]
 	private Button _dealButton;
 
 	[SerializeField]
@@ -58,7 +61,8 @@ public class UIManager : MonoBehaviour
 		_winningHandText.gameObject.SetActive(false);
 		OnDisableText();
 
-		SetInteractableButtons(false);
+		//SetInteractableButtons(false);
+		SetInteractableHoldButtons(false);
 
 	}
 
@@ -80,7 +84,24 @@ public class UIManager : MonoBehaviour
 		_winningHandText.gameObject.SetActive(true);
 		_winningHandText.text = "YOU LOSE";
 	}
+	//_UIManager.SetInteractableHoldButtons(true);
+	//_UIManager.SetInteractableBetButtons(false);
 
+	public void SetInteractableHoldButtons(bool interactable)
+	{
+		for (int i = 0; i < _holdButtons.Length; i++)
+		{
+			_holdButtons[i].interactable = interactable;
+		}
+		print("bet buttons1");
+	}
+	public void SetInteractableBetButtons(bool interactable)
+	{
+		print("bet buttons");
+		_betButton.interactable = interactable;
+		_maxBetButton.interactable = interactable;
+	}
+	/*
 	public void SetInteractableButtons(bool interactable)
 	{
 		for (int i = 0; i < _holdButtons.Length; i++)
@@ -89,7 +110,7 @@ public class UIManager : MonoBehaviour
 		}
 
 		
-	}
+	}*/
 
 	public void OnDisableText()
 	{
@@ -120,7 +141,7 @@ public class UIManager : MonoBehaviour
 
 	public void Reset()
 	{
-		_wager.text = "WAGER    " + 0;
+		//_wager.text = "WAGER    " + 0;
 		_winningHandText.gameObject.SetActive(false);
 		_win.gameObject.SetActive(false);
 
@@ -136,6 +157,13 @@ public class UIManager : MonoBehaviour
 
 		_wager.text = "WAGER    " + _wagerInt;
 		_player.AddWager();
+	}
+	public void MaxWager()
+	{
+		_wagerInt = _player.GetMaxWager();
+
+		_wager.text = "WAGER    " + _wagerInt;
+		_player.SetMaxWager();
 	}
 
 	public void DealDraw()

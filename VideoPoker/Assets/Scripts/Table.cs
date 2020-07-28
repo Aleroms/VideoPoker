@@ -6,9 +6,8 @@ public class Table : MonoBehaviour
 {
 	
 	private List<GameObject> _selectedCards;
-	[SerializeField]
 	private List<GameObject> _displayedCards;
-	private List<GameObject> _discardPile;
+	private List<GameObject> _faceDownCards;
 
 	[SerializeField]
 	private Transform[] slot;
@@ -16,10 +15,15 @@ public class Table : MonoBehaviour
 	[SerializeField]
 	private bool[] _isSelected;
 
+	[SerializeField]
+	private GameObject _faceDownPrefab;
+
 	private Deck _deck;
 	//private UIManager _uim;
 
 	private int _handSize;
+	private bool _isFaceDown;
+
 	
 	public void StartGame()
 	{
@@ -29,7 +33,7 @@ public class Table : MonoBehaviour
 
 		_selectedCards = new List<GameObject>();
 		_displayedCards = new List<GameObject>();
-		_discardPile = new List<GameObject>();
+		_faceDownCards = new List<GameObject>();
 
 		_deck = GameObject.Find("Deck").GetComponent<Deck>();
 		//_uim = GameObject.Find("Canvas").GetComponent<UIManager>();
@@ -41,6 +45,30 @@ public class Table : MonoBehaviour
 		//print("uim is null");
 
 		SetDisplayCards();
+		SetBackFaceCards();
+	}
+	public bool IsFaceDown()
+	{
+		return _isFaceDown;
+	}
+	public void DisableBackFaceCards()
+	{
+		_isFaceDown = false; 
+
+		for (int i = 0; i < _faceDownCards.Count; i++)
+			Destroy(_faceDownCards[i].gameObject);
+	}
+	void SetBackFaceCards()
+	{
+		_isFaceDown = true;
+
+		for(int i = 0; i < _displayedCards.Count;i++)
+		{
+			_faceDownCards.Add(Instantiate(_faceDownPrefab, slot[i].transform.position, Quaternion.identity));
+			float x = _faceDownCards[i].transform.position.x;
+			float y = _faceDownCards[i].transform.position.y;
+			_faceDownCards[i].transform.position = new Vector3(x, y, -0.1f);
+		}
 	}
 	
 	public void SetDisplayCards()

@@ -58,34 +58,43 @@ public class GameManager : MonoBehaviour
 
 			if (_playerWager > 0)
 			{
-				//add new if statement here to flip hidden cards && check if flipped cards or not
-				if(true)
+				if (_table.IsFaceDown())
+				{
+					_table.DisableBackFaceCards();
+
+					//write code here?
+					_UIManager.SetInteractableBetButtons(false);
+					_UIManager.SetInteractableHoldButtons(true);
+				}
+				else
 				{
 					if (_restart == false)
 					{
+						//enable hold buttons
+						//disable max and bet buttons
+						//_UIManager.SetInteractableButtons(true);
+						print("here");
 
 						//_table.SetDisplayCards(); 7/27
-						_UIManager.DealDraw();
+						//_UIManager.DealDraw();
 						PlayGame();
 						_restart = true;
 
+						_UIManager.SetInteractableBetButtons(true);
+						_UIManager.SetInteractableHoldButtons(false);
 					}
 					else
-					{
+					{//i can still bet even though i shouldn't be allowed too
+					 //hold buttons are not interactable
+						_UIManager.SetInteractableHoldButtons(true);
+						_UIManager.SetInteractableBetButtons(false);
+
 						RestartMatch();
 						_restart = false;
 						print("restarting...");
 					}
-
-					//_isFlipped = true;
 				}
-				else
-				{
 
-				}
-				
-
-				
 			}
 			else
 			{
@@ -96,10 +105,10 @@ public class GameManager : MonoBehaviour
 		else
 			GameOver();
 
-		_UIManager.DrawDeal();
+		//_UIManager.DrawDeal();
 
 	}
-	
+	/*
 	public void Draw()
 	{
 		_playerCredits = _player.GetCredits();
@@ -125,7 +134,7 @@ public class GameManager : MonoBehaviour
 		_UIManager.DrawDeal();
 
 	}
-
+	
 	public void Deal()
 	{
 		if (_restart == false)
@@ -149,7 +158,7 @@ public class GameManager : MonoBehaviour
 			RestartMatch();
 			print("restarting...");
 		}
-	}
+	}*/
 
 	void RestartMatch()
 	{
@@ -165,7 +174,7 @@ public class GameManager : MonoBehaviour
 		//_UIManager.Reset();
 		//_restart = false;
 	}
-
+	
 	void PlayGame()
 	{
 		//print("name");

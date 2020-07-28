@@ -11,8 +11,8 @@ public class Player : MonoBehaviour
   
 	public void StartGame()
 	{
-		//_credits = 100;
-		_credits = Credits.GetCredits();
+		_credits = 100;
+		//_credits = Credits.GetCredits();
 		_wager = 0;
 	}
 
@@ -39,6 +39,10 @@ public class Player : MonoBehaviour
 	public void SetMaxWager(int n)
 	{
 		_maxWager = n;
+	}
+	public void SetMaxWager()
+	{
+		_wager = _maxWager;
 	}
 
 	public int GetWager()
