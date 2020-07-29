@@ -48,6 +48,14 @@ public class GameManager : MonoBehaviour
 		_playerCredits = _player.GetCredits();
 		
 	}
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			print("quiting...");
+			Application.Quit();
+		}
+	}
 	public void PlayHand()
 	{
 		_playerCredits = _player.GetCredits();
