@@ -35,6 +35,12 @@ public class UIManager : MonoBehaviour
 	[SerializeField]
 	private Button _drawButton;
 
+	[SerializeField]
+	private GameObject _notificationPanel;
+
+	[SerializeField]
+	private Text _notificationMessage;
+
 	private Player _player;
 	private Table _table;
 
@@ -59,11 +65,29 @@ public class UIManager : MonoBehaviour
 		_wager.text = "WAGER    " + _wagerInt;
 		_win.gameObject.SetActive(false);
 		_winningHandText.gameObject.SetActive(false);
+		_notificationMessage.gameObject.SetActive(false);
+		_notificationPanel.gameObject.SetActive(false);
 		OnDisableText();
 
 		
 		SetInteractableHoldButtons(false);
 
+	}
+	public void DisplayMessage(string message)
+	{
+		StartCoroutine(DisplayMessageCoroutine(message));
+	}
+	IEnumerator DisplayMessageCoroutine(string message)
+	{
+		_notificationPanel.gameObject.SetActive(true);
+		_notificationMessage.gameObject.SetActive(true);
+
+		_notificationMessage.text = message;
+
+		yield return new WaitForSeconds(1f);
+
+		_notificationPanel.gameObject.SetActive(false);
+		_notificationMessage.gameObject.SetActive(false);
 	}
 
 	public void DisplayEarnings(int earnings, string winningHand)
@@ -82,6 +106,7 @@ public class UIManager : MonoBehaviour
 		_credits.text = "CREDITS    " + credits;
 
 		_winningHandText.gameObject.SetActive(true);
+		
 		_winningHandText.text = "YOU LOSE";
 	}
 	

@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
 			}
 			else
 			{
-				print("PLEASE BET");
+				_UIManager.DisplayMessage("PLEASE BET");
 			}
 
 		}
@@ -145,7 +145,7 @@ public class GameManager : MonoBehaviour
 
 	void GameOver()
 	{
-		print("Game Over");
+		_UIManager.DisplayMessage("GAME OVER");
 		Application.Quit();
 	}
 

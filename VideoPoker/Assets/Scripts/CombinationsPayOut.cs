@@ -133,12 +133,13 @@ public class CombinationsPayOut : MonoBehaviour
 	{
 		bool p34,p01;
 
-		
+		foreach (int i in _pairChecker)
+			print(i);
 
 		p34 = _pairChecker[3] == _pairChecker[4];
 		p01 = _pairChecker[0] == _pairChecker[1];
 
-		return CheckForThreeK() && p34 || CheckForThreeK() && p01;
+		return (CheckForThreeK() && p34) || (CheckForThreeK() && p01);
 	}
 
 	bool CheckForJacksOrBetter()
