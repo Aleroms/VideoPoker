@@ -62,7 +62,7 @@ public class UIManager : MonoBehaviour
 
 		}
 		_wagerInt = 0;
-		_wager.text = "WAGER    " + _wagerInt;
+		_wager.text = "WAGER " + _wagerInt;
 		_win.gameObject.SetActive(false);
 		_winningHandText.gameObject.SetActive(false);
 		_notificationMessage.gameObject.SetActive(false);
@@ -84,7 +84,7 @@ public class UIManager : MonoBehaviour
 
 		_notificationMessage.text = message;
 
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(0.75f);
 
 		_notificationPanel.gameObject.SetActive(false);
 		_notificationMessage.gameObject.SetActive(false);
@@ -92,7 +92,7 @@ public class UIManager : MonoBehaviour
 
 	public void DisplayEarnings(int earnings, string winningHand)
 	{
-		_win.text = "WIN    " + earnings;
+		_win.text = "WIN   " + earnings;
 		_win.gameObject.SetActive(true);
 
 		_winningHandText.text = winningHand;
@@ -167,14 +167,14 @@ public class UIManager : MonoBehaviour
 
 		_wagerInt = _player.GetWager();
 
-		_wager.text = "WAGER    " + _wagerInt;
+		_wager.text = "WAGER " + _wagerInt;
 		
 	}
 	public void MaxWager()
 	{
 		_wagerInt = _player.GetMaxWager();
 
-		_wager.text = "WAGER    " + _wagerInt;
+		_wager.text = "WAGER " + _wagerInt;
 		_player.SetMaxWager();
 	}
 	
