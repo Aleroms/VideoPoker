@@ -19,7 +19,7 @@ public class Table : MonoBehaviour
 	private GameObject _faceDownPrefab;
 
 	private Deck _deck;
-	//private UIManager _uim;
+	
 
 	private int _handSize;
 	private bool _isFaceDown;
@@ -36,14 +36,12 @@ public class Table : MonoBehaviour
 		_faceDownCards = new List<GameObject>();
 
 		_deck = GameObject.Find("Deck").GetComponent<Deck>();
-		//_uim = GameObject.Find("Canvas").GetComponent<UIManager>();
+		
 
 		if (_deck == null)
 			print("deck ref is null");
 
-		//if (_uim == null)
-		//print("uim is null");
-
+	
 		SetDisplayCards();
 		SetBackFaceCards();
 	}
@@ -82,11 +80,6 @@ public class Table : MonoBehaviour
 			_displayedCards[i].transform.position = slot[i].transform.position;
 			_isSelected[i] = false;
 
-			/*
-			_displayedCards.Add(_deck.GetSelection());
-			_displayedCards[i].transform.position = slot[i].transform.position;
-			_isSelected[i] = false;
-			*/
 		}
 
 	}
@@ -112,10 +105,6 @@ public class Table : MonoBehaviour
 			}
 			else
 			{
-				
-				
-				//_discardPile.Add(_displayedCards[i]);
-
 
 				_selectedCards.Add(_deck.GetSelection());
 				_selectedCards[i].transform.position = slot[i].transform.position;
@@ -141,16 +130,6 @@ public class Table : MonoBehaviour
 		print("displayCards count:" + _displayedCards.Count);
 		
 
-		/*
-		for (int i = 0; i < _displayedCards.Count; i++)
-			_displayedCards[i].transform.position = new Vector3(-12, 0);
-
-		_selectedCards.Clear();
-		_displayedCards.Clear();
-
-		_deck.Reset();
-
-		SetDisplayCards();*/
 	}
 
 

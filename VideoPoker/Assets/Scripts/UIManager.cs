@@ -61,7 +61,7 @@ public class UIManager : MonoBehaviour
 		_winningHandText.gameObject.SetActive(false);
 		OnDisableText();
 
-		//SetInteractableButtons(false);
+		
 		SetInteractableHoldButtons(false);
 
 	}
@@ -84,8 +84,7 @@ public class UIManager : MonoBehaviour
 		_winningHandText.gameObject.SetActive(true);
 		_winningHandText.text = "YOU LOSE";
 	}
-	//_UIManager.SetInteractableHoldButtons(true);
-	//_UIManager.SetInteractableBetButtons(false);
+	
 
 	public void SetInteractableHoldButtons(bool interactable)
 	{
@@ -93,24 +92,14 @@ public class UIManager : MonoBehaviour
 		{
 			_holdButtons[i].interactable = interactable;
 		}
-		print("bet buttons1");
+		
 	}
 	public void SetInteractableBetButtons(bool interactable)
 	{
-		print("bet buttons");
+		
 		_betButton.interactable = interactable;
 		_maxBetButton.interactable = interactable;
 	}
-	/*
-	public void SetInteractableButtons(bool interactable)
-	{
-		for (int i = 0; i < _holdButtons.Length; i++)
-		{
-			_holdButtons[i].interactable = interactable;
-		}
-
-		
-	}*/
 
 	public void OnDisableText()
 	{
@@ -141,7 +130,7 @@ public class UIManager : MonoBehaviour
 
 	public void Reset()
 	{
-		//_wager.text = "WAGER    " + 0;
+	
 		_winningHandText.gameObject.SetActive(false);
 		_win.gameObject.SetActive(false);
 
@@ -149,14 +138,12 @@ public class UIManager : MonoBehaviour
 
 	public void AddWager()
 	{
+		_player.AddWager();
 
-		if (_wagerInt < _maxWager)
-			_wagerInt++;
-		else
-			_wagerInt = 0;
+		_wagerInt = _player.GetWager();
 
 		_wager.text = "WAGER    " + _wagerInt;
-		_player.AddWager();
+		
 	}
 	public void MaxWager()
 	{
@@ -165,19 +152,6 @@ public class UIManager : MonoBehaviour
 		_wager.text = "WAGER    " + _wagerInt;
 		_player.SetMaxWager();
 	}
-
-	public void DealDraw()
-	{
-		_dealButton.gameObject.SetActive(false);
-		_drawButton.gameObject.SetActive(true);
-		_betButton.interactable = false;
-	}
-
-	public void DrawDeal()
-	{
-		_dealButton.gameObject.SetActive(true);
-		_drawButton.gameObject.SetActive(false);
-		_betButton.interactable = true;
-	}
+	
   
 }

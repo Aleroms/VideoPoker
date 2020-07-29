@@ -69,25 +69,6 @@ public class Deck : MonoBehaviour
 		_deck2 = new List<GameObject>();
 		GenerateDeck();
 		_deck3 = Shuffle();
-		/*
-		for (int i = 0; i < _discardPile.Count; i++)
-			_deck3.Push(_discardPile[i]);
-
-
-		for (int i = 0; i < _deck3.Count; i++)
-		{
-			print("Destroy(" + _deck3.Peek() + ")");
-			Destroy(_deck3.Pop());//issue may be that it is the only reference
-		}
-
-
-		//_deck2 = new List<GameObject>();
-		_deck3 = new Stack<GameObject>();
-		_deck3 = Shuffle();
-		*/
-		
-		//_deck3.Clear();
-		//_deck3 = Shuffle();
 		
 	}
 

@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
 		_player.SetMaxWager(5);
 		_playerCredits = _player.GetCredits();
 		
-	}//changed the button from deal to playhand
+	}
 	public void PlayHand()
 	{
 		_playerCredits = _player.GetCredits();
@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
 				{
 					_table.DisableBackFaceCards();
 
-					//write code here?
+					
 					_UIManager.SetInteractableBetButtons(false);
 					_UIManager.SetInteractableHoldButtons(true);
 				}
@@ -70,13 +70,7 @@ public class GameManager : MonoBehaviour
 				{
 					if (_restart == false)
 					{
-						//enable hold buttons
-						//disable max and bet buttons
-						//_UIManager.SetInteractableButtons(true);
-						print("here");
-
-						//_table.SetDisplayCards(); 7/27
-						//_UIManager.DealDraw();
+						
 						PlayGame();
 						_restart = true;
 
@@ -84,14 +78,13 @@ public class GameManager : MonoBehaviour
 						_UIManager.SetInteractableHoldButtons(false);
 					}
 					else
-					{//i can still bet even though i shouldn't be allowed too
-					 //hold buttons are not interactable
+					{
 						_UIManager.SetInteractableHoldButtons(true);
 						_UIManager.SetInteractableBetButtons(false);
 
 						RestartMatch();
 						_restart = false;
-						print("restarting...");
+						
 					}
 				}
 
@@ -105,60 +98,10 @@ public class GameManager : MonoBehaviour
 		else
 			GameOver();
 
-		//_UIManager.DrawDeal();
-
-	}
-	/*
-	public void Draw()
-	{
-		_playerCredits = _player.GetCredits();
-
-		if (_playerCredits > 0)
-		{
-			_playerWager = _player.GetWager();
-
-			if (_playerWager > 0)
-			{
-				PlayGame();
-				_restart = true;
-			}
-			else
-			{
-				print("PLEASE BET");
-			}
-
-		}
-		else
-			GameOver();
-
-		_UIManager.DrawDeal();
+		
 
 	}
 	
-	public void Deal()
-	{
-		if (_restart == false)
-		{
-			//if player placed a bet
-			_playerWager = _player.GetWager();
-
-			if (_playerWager > 0)
-			{
-				//_table.SetDisplayCards(); 7/27
-				_UIManager.DealDraw();
-				
-			}
-			else
-			{
-				print("PLEASE BET");
-			}		
-		}
-		else
-		{
-			RestartMatch();
-			print("restarting...");
-		}
-	}*/
 
 	void RestartMatch()
 	{
@@ -166,18 +109,12 @@ public class GameManager : MonoBehaviour
 		_table.Reset();
 		_UIManager.Reset();
 		_table.SetDisplayCards();
-		//Credits.SetCredits(_playerCredits);
-
-		//SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
 		
-		//_table.Reset();
-		//_UIManager.Reset();
-		//_restart = false;
 	}
 	
 	void PlayGame()
 	{
-		//print("name");
+		
 		_UIManager.OnDisableText();
 		_table.Play();
 

@@ -38,14 +38,11 @@ public class Cards : MonoBehaviour
 		if (i == 3)
 			_suit = Suit.SPADE;
 
-		//print(_suit);
+		
 	}
 	public void setRank(int n)
 	{
-		//change back to n
 		_rank = n + 1;
-		//print(_rank);
-		
 	}
 
 }

@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
 		if (_wager != _maxWager)
 			_wager++;
 		else
-			_wager = 0;
+			_wager = 1;
 
 	}
 
