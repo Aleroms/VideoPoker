@@ -8,6 +8,7 @@ public class CombinationsPayOut : MonoBehaviour
 	private List<GameObject> _selectedCards;
 	private List<int> _pairChecker;
 	private string _highestPair;
+	private bool _bigWin;
 	private Cards _card;
 
 	void Start()
@@ -21,6 +22,10 @@ public class CombinationsPayOut : MonoBehaviour
 	{
 		return _highestPair;
 	}
+	public bool BigWin
+	{
+		get => _bigWin;
+	}
 
 	public int GetPayOut()
 	{
@@ -30,29 +35,38 @@ public class CombinationsPayOut : MonoBehaviour
 		{
 			case "RoyalFlush":
 				payout = 800;
+				_bigWin = true;
 				break;
 			case "StraightFlush":
 				payout = 50;
+				_bigWin = true;
 				break;
 			case "FourOfAKind":
 				payout = 25;
+				_bigWin = true;
 				break;
 			case "FullHouse":
 				payout = 9;
+				_bigWin = true;
 				break;
 			case "Flush":
+				_bigWin = true;
 				payout = 6;
 				break;
 			case "Straight":
+				_bigWin = true;
 				payout = 4;
 				break;
 			case "ThreeOfAKind":
+				_bigWin = true;
 				payout = 3;
 				break;
 			case "TwoPairs":
+				_bigWin = true;
 				payout = 2;
 				break;
 			case "JacksOrBetter":
+				_bigWin = false;
 				payout = 1;
 				break;
 

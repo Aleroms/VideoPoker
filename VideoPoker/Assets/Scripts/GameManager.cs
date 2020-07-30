@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
 	private Table _table;
 	private UIManager _UIManager;
 	private CombinationsPayOut _cpo;
+	private AudioManager _audioManager;
 	public static GameManager instance;
 	
 	
@@ -28,11 +29,13 @@ public class GameManager : MonoBehaviour
 		_table = GameObject.Find("Canvas").GetComponent<Table>();
 		_cpo = GameObject.Find("GameManager").GetComponent<CombinationsPayOut>();
 		_UIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+		_audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
 
 		if (_table == null) print("table is null");
 		if (_player == null) print("player is null");
 		if (_cpo == null) print("combination is null");
 		if (_UIManager == null) print("UIManager is null");
+		if (_audioManager == null) print("Audio Manager is null");
 
 		_restart = false;
 	}
@@ -134,6 +137,11 @@ public class GameManager : MonoBehaviour
 
 			_player.AddCredits(payout);
 			_playerCredits = _player.GetCredits();
+
+			if (_cpo.BigWin)
+				_audioManager.BigWin();
+			else
+				_audioManager.SmallWin();
 
 			_UIManager.DisplayEarnings(payout, _cpo.GetWinningHand());
 
