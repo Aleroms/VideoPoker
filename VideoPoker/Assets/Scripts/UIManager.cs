@@ -43,6 +43,7 @@ public class UIManager : MonoBehaviour
 
 	private Player _player;
 	private Table _table;
+	private UIPayout _payout;
 
 	private int _maxWager;
 	private int _wagerInt;
@@ -52,6 +53,7 @@ public class UIManager : MonoBehaviour
 
 		_player = GameObject.Find("Player").GetComponent<Player>();
 		_table = GameObject.Find("Canvas").GetComponent<Table>();
+		_payout = GameObject.Find("Payout_Panel").GetComponent<UIPayout>();
 
 		if (_table == null) print("table is null");
 
@@ -61,6 +63,9 @@ public class UIManager : MonoBehaviour
 			_maxWager = 5;
 
 		}
+
+		if (_payout == null) print("payout is null");
+
 		_wagerInt = 0;
 		_wager.text = "WAGER " + _wagerInt;
 		_win.gameObject.SetActive(false);
@@ -164,6 +169,7 @@ public class UIManager : MonoBehaviour
 	public void AddWager()
 	{
 		_player.AddWager();
+		_payout.PanelAddWager();
 
 		_wagerInt = _player.GetWager();
 
@@ -173,6 +179,7 @@ public class UIManager : MonoBehaviour
 	public void MaxWager()
 	{
 		_wagerInt = _player.GetMaxWager();
+		_payout.PanelMaxWager();
 
 		_wager.text = "WAGER " + _wagerInt;
 		_player.SetMaxWager();
