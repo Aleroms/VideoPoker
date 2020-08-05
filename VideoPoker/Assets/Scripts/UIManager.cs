@@ -47,6 +47,7 @@ public class UIManager : MonoBehaviour
 
 	private int _maxWager;
 	private int _wagerInt;
+	private int _currentCredits;
     
 	public void StartGame()
 	{
@@ -59,7 +60,8 @@ public class UIManager : MonoBehaviour
 
 		if (_player != null)
 		{
-			_credits.text = "CREDITS     " + _player.GetCredits();
+			_currentCredits = _player.GetCredits();
+			_credits.text = "CREDITS     " + _currentCredits;
 			_maxWager = 5;
 
 		}
@@ -103,16 +105,44 @@ public class UIManager : MonoBehaviour
 		_winningHandText.text = winningHand;
 		_winningHandText.gameObject.SetActive(true);
 
-		_credits.text = "CREDITS    " + _player.GetCredits();
+		StartCoroutine(DisplayEarningsCoroutine(earnings));
+		
+	}
+	IEnumerator DisplayEarningsCoroutine(int earnings)
+	{
+
+		for(int i = 0; i < earnings; i++)
+		{
+			_currentCredits++;
+			_credits.text = "CREDITS    " + _currentCredits;
+			yield return new WaitForSeconds(0.1f);
+		}
+
 	}
 
 	public void LoseCondition(int credits)
 	{
-		_credits.text = "CREDITS    " + credits;
+		//_currentCredits = credits;
+		//_credits.text = "CREDITS    " + _currentCredits;
+
+		StartCoroutine(LoseConditionCoroutine(credits));
 
 		_winningHandText.gameObject.SetActive(true);
 		
 		_winningHandText.text = "YOU LOSE";
+	}
+	IEnumerator LoseConditionCoroutine(int credits)
+	{
+		print("credits" + credits + "_currentCredits" + _currentCredits);
+		int difference = _currentCredits - credits;
+		//_currentCredits = credits;
+
+		for(int i = 0; i < difference; i++)
+		{
+			_currentCredits--;
+			_credits.text = "CREDITS    " + _currentCredits;
+			yield return new WaitForSeconds(0.1f);
+		}
 	}
 	
 
