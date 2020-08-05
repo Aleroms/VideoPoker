@@ -171,6 +171,7 @@ public class UIManager : MonoBehaviour
 
 	public void UserSelect(int n)
 	{
+		
 		if( n >= 0 && n < _heldText.Length)
 		{
 			if (_heldText[n].gameObject.activeSelf == false)

@@ -37,7 +37,5 @@ public class AudioManager : MonoBehaviour
 		_audioManager.PlayOneShot(_audioManager.clip);
 	}
 
-
-    // Start is called before the first frame update
     
 }

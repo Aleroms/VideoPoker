@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
 	public void StartGame()
 	{
 		_credits = 100;
-		//_credits = Credits.GetCredits();
 		_wager = 0;
 	}
 

@@ -127,7 +127,7 @@ public class Table : MonoBehaviour
 		_displayedCards = new List<GameObject>();
 		_selectedCards = new List<GameObject>();
 
-		print("displayCards count:" + _displayedCards.Count);
+		//print("displayCards count:" + _displayedCards.Count);
 		
 
 	}
